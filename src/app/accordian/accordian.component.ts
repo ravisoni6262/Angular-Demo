@@ -1,37 +1,36 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import {NgbAccordion} from '@ng-bootstrap/ng-bootstrap';
-import { Accordian } from '../popup/accordian-data.model';
+import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
+import { NgbAccordion } from "@ng-bootstrap/ng-bootstrap";
+import { Accordian } from "../shared/accordian-data.model";
+import {IndeterminateDirective} from "../shared/indeterminate.directive";
+
 
 @Component({
-  selector: 'app-accordian',
-  templateUrl: './accordian.component.html'
+  selector: "app-accordian",
+  templateUrl: "./accordian.component.html",
 })
 export class AccordianComponent implements OnInit {
-  @ViewChild('accordian') accordionComponent: NgbAccordion;
-  @ViewChild('abc') abc: any;
-  @Input() accordianData : Accordian[];
-  isChecked : Boolean;
-  constructor() {
-  this.isChecked = false;
-  }
+  @ViewChild("accordian") accordionComponent: NgbAccordion;
+  @ViewChild("headerSwitch") headerSwitch: any;
+  @ViewChild("childPlugin") childPlugin: any;
+  @Input() accordianData: Accordian[];
+  isChecked: Boolean;
+  constructor(private elem: ElementRef) {}
 
   ngOnInit() {
-    // console.log(this.accordianData);
+    console.log(this.accordianData);
   }
-  ngAfterViewInit(){
-    console.log(this.abc.nativeElement.value);
+  ngAfterViewInit() {
+    let elements = this.elem.nativeElement.querySelectorAll(".parent-checkbox");
   }
 
-  toggle(id:string): void {
+  // Opening accordian's Panels Id wise
+  toggle(id: string): void {
     this.accordionComponent.toggle(id);
   }
 
-  checkPluginSwitch(event: Event) {
-    console.log((<HTMLInputElement>event.target));
-    console.log(this.abc.nativeElement.value);
-
-    // const forCategary = document.getElementById('switch').value()
-    if((<HTMLInputElement>event.target).checked === true && (<HTMLInputElement>event.target).parentElement.accessKey === this.abc.nativeElement.value) {
+  // Check Header-Switch on checking Plugin switch
+  turnOnHeaderSwitch(event: Event, headerSwitchId: String) {
+    if (this.arePluginsChecked) {
       this.isChecked = true;
     }
     else {
@@ -39,4 +38,11 @@ export class AccordianComponent implements OnInit {
     }
   }
 
+  arePluginsChecked(id: String) {
+    if (this.childPlugin.nativeElement.checked == true)
+      return this.childPlugin.nativeElement.checked;
+
+    return false;
+  }
 }
+

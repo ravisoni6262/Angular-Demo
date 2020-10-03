@@ -1,15 +1,13 @@
 import { Component, ViewChild } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
-import {NgbAccordion} from '@ng-bootstrap/ng-bootstrap';
-import {Data} from "./accordian-data.model";
+import {Data} from "../shared/accordian-data.model";
 
 @Component({
   selector: "app-popup",
   templateUrl: "./popup.component.html",
 })
 export class PopupComponent {
-  @ViewChild('acc') accordionComponent: NgbAccordion;
   bannerData: Data;
   closeResult: string;
   public isCollapsed = false;
@@ -19,12 +17,6 @@ export class PopupComponent {
 
   ngOnInit() {
       this.fetchData();
-  }
-
-  // Method call on click.
-  toggle(id:string): void {
-    //Here you have access to AccordionComponent as discribe on documentation.    
-      this.accordionComponent.toggle(id);
   }
 
   open(content) {

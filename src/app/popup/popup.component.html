@@ -1,6 +1,6 @@
 <!-- popup section Start Here -->
 
-<!-- Button trigger modal -->
+<!-- Button to trigger modal -->
 <div class="maon-popup-div d-inline-block w-100 p-5 text-center">
   <button type="button" class="btn btn-primary" (click)="open(cookieBanner)">
     Launch Cookie-Banner
@@ -53,19 +53,19 @@
                 href="#"
                 role="button"
                 [attr.aria-expanded]="!isCollapsed"
-                aria-controls="customize"
+                aria-controls="customize-accordian"
                 (click)="isCollapsed = !isCollapsed"
                 >Customize <i class="fa fa-caret-down"></i
               ></a>
             </div>
           </div>
           <!-- Calling Accordian Component -->
-          <p *ngIf="isFetching && !errorMeassage">Loading... Please Wait.</p>
           <div
             class="customize-inner-box collapse"
-            id="customize"
+            id="customize-accordian"
             [ngbCollapse]="isCollapsed"
           >
+          
             <p *ngIf="bannerData.accordian.length < 1 && !isFetching">
               No Customized Settings Fields
             </p>
@@ -78,7 +78,7 @@
     </div>
   </ng-template>
   <!-- Initial Loading & Error Handling -->
-  
+  <p *ngIf="isFetching && !errorMeassage">Loading... Please Wait.</p>
   <div *ngIf="errorMeassage" class="alert alert-danger">
     <h4>Some Error Occured</h4>
     <p>{{ errorMessage }}</p>
