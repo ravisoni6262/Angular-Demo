@@ -1,0 +1,226 @@
+/* You can add global styles to this file, and also import other style files */
+@import "https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600&display=swap";
+@import "./assets/css/font-awesome.min.css";
+
+/* font css start here */
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./assets/fonts/poppins-v12-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Poppins Regular'), local('Poppins-Regular'),
+         url('./assets/fonts/poppins-v12-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./assets/fonts/poppins-v12-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('./assets/fonts/poppins-v12-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('./assets/fonts/poppins-v12-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('./assets/fonts/poppins-v12-latin-regular.svg#Poppins') format('svg'); /* Legacy iOS */
+  }
+  
+  /*end font css*/
+  
+  body{
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+  }
+  a{
+      color: #000
+  }
+  a:hover, a:focus{
+      text-decoration: none;
+      color: #444;
+  }
+  .cookieBanner .modal-content{
+      border-radius: 10px;
+  }
+  .cookieBanner .modal-header{
+      border: 0px;
+  }
+  .cookieBanner .modal-header .modal-title{
+      font-size: 22px;
+      font-weight: 500;
+  }
+  .cookieBanner .modal-body{
+      padding: 0px;
+  }
+  
+  .cookieBanner .modal-body .modal-body-inner-text{
+      display: inline-block;
+      width: 100%;
+      padding:0px 15px 20px;
+      box-shadow: 0px 5px 12px rgba(00,00,00,0.1);
+  }
+  .cookieBanner .close{
+        position: absolute;
+        top: 14px;
+        right: 5px;
+        padding: 0px;
+        margin: 0;
+        box-shadow: 0 0 0 0 !important;
+  }
+  .cookieBanner .modal-body .head-pera{
+      font-size: 13px;
+      color: #444;
+      font-weight: 300;
+      text-align: left justify;
+  }
+  .cookieBanner .modal-body .privacy-policy a{
+      font-weight: 600;
+  }
+  .cookieBanner .modal-body .settings-btns .btn-success{
+      font-size: 14px;
+      padding:5px 25px;
+  }
+  .btn-white-outline{
+      background: transparent;
+      border: 1px solid #ccc;
+      color: #ccc;
+      font-size: 14px;
+      padding: 5px 25px;
+  }
+  .btn-white-outline:hover{
+      background: #ccc;
+      color: #fff;
+      box-shadow: 0px 0px 0px 0px;
+  }
+  .cookieBanner .modal-body .settings-btns .customize-link{
+      font-size: 14px;
+      color: #444;
+  
+  }
+  .cookieBanner .modal-body .settings-btns .customize-link:hover{
+      outline: none;
+  }
+  .cookieBanner .modal-body .customize-inner-box{
+      background: #f3f3f3;
+      padding: 15px;
+  }
+  /***** accordion check box switch css start here ********/
+ .switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin-bottom: 0px;
+  }
+  
+ .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+   input:checked + .slider {
+    background-color: #d3efdb;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+ input:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+    background-color: #24b04b;
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+ .slider.round:before {
+    border-radius: 50%;
+  }
+  /**** end here ****/
+  /*** accordion css start here ***/
+ .customize-inner-box .accordion > .card{
+      margin-bottom: 20px;
+      border: 0px;
+      border-radius: 5px;
+  }
+.accordion > .card .card-header{
+      background: #fff;
+      border: 0px;
+      padding: 0.50rem 1.10rem !important;
+  }
+.accordion .card .card-header {
+      font-size: 14px;
+  }
+  .accordion .card .card-header .inner-head-text{
+      font-size: 14px;
+      color: #000;
+      font-weight: 500;
+      /* width: calc(100% - 70px); */
+      text-align: left;
+  }
+
+  .accordion .card .card-header .inner-head-text .fa{
+    margin-left: auto !important;
+  }
+  .accordion .card .card-body{
+      text-align: left;
+      font-weight: 300;
+      font-size: 14px;
+  }
+  .accordion .card .card-body p{
+      color: #aaaaaa;
+  }
+  .plugins-options table tr th, .plugins-options table tr td{
+      border: 0px;
+      font-size: 14px;
+  }
+  .plugins-options table tr th{
+      font-weight: 500;
+  }
+  .plugins-options table tr th.plugins-name{
+      width: 150px;
+  }
+
+  .accordion .card .card-header .btn-link:hover {
+    text-decoration: none !important;
+  }
+
+  .accordion .card .card-header .btn.focus, .btn:focus {
+    box-shadow:none !important;
+}
+
+::ng-deep .card .card-header .btn .btn-link .collapsed{
+    width: 100% !important;
+    padding: 0px !important;
+    box-shadow: 0 0 0 0;
+  }
+  ::ng-deep .card .card-header {
+    width: 100% !important;
+    
+  }
+
+  .panelStyle button {
+    width: 100% !important;
+    padding: 0px !important;
+  }
