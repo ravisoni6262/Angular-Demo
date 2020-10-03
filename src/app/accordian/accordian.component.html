@@ -1,0 +1,44 @@
+<ngb-accordion #acc0rdian="ngbAccordion" [destroyOnHide]='false' *ngIf = "accordianData.length >= 1">
+  <ngb-panel #panelStyle [id]="'toggle-'+data.CategoyId" *ngFor = "let data of accordianData">
+    <ng-template ngbPanelTitle>
+          <label [attr.for]="data.CategoyHeading" class="switch mr-3">
+            <input type="checkbox" [checked]="isChecked" id="switchLabel" [value]="data.CategoyHeading" #abc>
+            <span class="slider round"></span>
+          </label>
+          <a type="button"  class="inner-head-text" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">{{ data.CategoyHeading }} <i class="fa fa-caret-down"></i></a>
+    </ng-template>
+    <ng-template ngbPanelContent>
+
+  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div class="card-body">
+      <p>{{ data.CategoyText }}</p>
+      <div class="plugins-options">
+        <table class="table">
+          <tr>
+            <th class="plugins-name">Plugins</th>
+            <th>Block/Enable</th>
+          </tr>
+          <tr *ngFor="let plugin of data.PluginList">
+            <td>{{ plugin.ComplianceType }}</td>
+            <td>
+              <div class="plugin-enable-option d-inline-flex align-items-center w-100">
+                <label [accessKey]="data.CategoyHeading" class="switch mr-3">
+                  <input type="checkbox" [id]="plugin.ComplianceTypeID" (input)="checkPluginSwitch($event, data.CategoyHeading)">
+                  <span class="slider round"></span>
+                </label>
+                <a *ngIf="plugin.optOutExternalLink; else noSiteUrl" [href]="plugin.optOutExternalLink" class="ml-auto">Go To Site</a>
+                <ng-template #noSiteUrl>
+                  <a href="#" class="ml-auto">Go To Site</a>
+                </ng-template>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div> 
+    </div>
+  </div>
+
+    </ng-template>
+  </ngb-panel>
+  </ngb-accordion>
+
