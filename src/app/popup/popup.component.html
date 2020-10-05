@@ -1,7 +1,7 @@
 <!-- popup section Start Here -->
 
 <!-- Button to trigger modal -->
-<div class="maon-popup-div d-inline-block w-100 p-5 text-center">
+<div class="d-inline-block w-100 p-5 text-center">
   <button type="button" class="btn btn-primary" (click)="open(cookieBanner)">
     Launch Cookie-Banner
   </button>
@@ -66,11 +66,11 @@
             [ngbCollapse]="isCollapsed"
           >
           
-            <p *ngIf="bannerData.accordian.length < 1 && !isFetching">
+            <p *ngIf="bannerData.length < 1 && !isFetching">
               No Customized Settings Fields
             </p>
             <app-accordian
-              [accordianData]="bannerData.accordian"
+              [accordianData]=bannerData
             ></app-accordian>
           </div>
         </div>

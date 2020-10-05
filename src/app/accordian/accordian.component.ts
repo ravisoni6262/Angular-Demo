@@ -1,8 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { NgbAccordion } from "@ng-bootstrap/ng-bootstrap";
-import { Accordian } from "../shared/accordian-data.model";
-import {IndeterminateDirective} from "../shared/indeterminate.directive";
-
+import { Accordian, Plugins } from "../shared/accordian-data.model";
 
 @Component({
   selector: "app-accordian",
@@ -13,15 +11,10 @@ export class AccordianComponent implements OnInit {
   @ViewChild("headerSwitch") headerSwitch: any;
   @ViewChild("childPlugin") childPlugin: any;
   @Input() accordianData: Accordian[];
-  isChecked: Boolean;
-  constructor(private elem: ElementRef) {}
+  isSelected: boolean;
+  constructor() {}
 
-  ngOnInit() {
-    console.log(this.accordianData);
-  }
-  ngAfterViewInit() {
-    let elements = this.elem.nativeElement.querySelectorAll(".parent-checkbox");
-  }
+  ngOnInit() {}
 
   // Opening accordian's Panels Id wise
   toggle(id: string): void {
@@ -29,20 +22,30 @@ export class AccordianComponent implements OnInit {
   }
 
   // Check Header-Switch on checking Plugin switch
-  turnOnHeaderSwitch(event: Event, headerSwitchId: String) {
-    if (this.arePluginsChecked) {
-      this.isChecked = true;
+  turnOnHeaderSwitch(event: Event, data: Accordian, childData: Plugins) {
+    if(this.uncheckHeaderBox(childData) === false) {
+      return data.BlockingEnabled = false;
     }
-    else {
-      this.isChecked = false;
-    }
+    data.BlockingEnabled = childData.map((childItem: any) => {
+      return childItem.BlockingEnabled;
+    });
   }
 
-  arePluginsChecked(id: String) {
-    if (this.childPlugin.nativeElement.checked == true)
-      return this.childPlugin.nativeElement.checked;
+  // Uncheck Header switch if Plugins switch are off
+  uncheckHeaderBox(childData: Plugins) {
+    for (let i = 0; i < childData.length; i++) {
+    const pluginChecked:boolean = childData[i].BlockingEnabled;
+    if(!pluginChecked) return false;
+    return true;
+    }
+   
+  }
 
-    return false;
+  // Check Plugins Checkbox when Header Checkbox is checked
+  turnOnChildSwitch(data: Accordian) {
+    for (let i = 0; i < data.PluginList.length; i++) {
+      data.PluginList[i].BlockingEnabled = data.BlockingEnabled;
+    }
   }
 }
 

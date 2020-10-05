@@ -1,8 +1,8 @@
 # Angular-Demo
 Cookie Banner based on Angular 7.
 
-##To Install
+## To Install
 npm install
 
-##To start
+## To start
 ng serve

@@ -1,14 +1,16 @@
 import { Component, ViewChild } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
-import {Data} from "../shared/accordian-data.model";
+import { Data } from "../shared/accordian-data.model";
+import { map } from "rxjs/operators";
+import { apiEndPoint } from "../shared/api-endpoint";
 
 @Component({
   selector: "app-popup",
   templateUrl: "./popup.component.html",
 })
 export class PopupComponent {
-  bannerData: Data;
+  bannerData: any;
   closeResult: string;
   public isCollapsed = false;
   isFetching: Boolean = false;
@@ -16,7 +18,7 @@ export class PopupComponent {
   constructor(private modalService: NgbModal, private http: HttpClient) {}
 
   ngOnInit() {
-      this.fetchData();
+    this.fetchData();
   }
 
   open(content) {
@@ -44,14 +46,32 @@ export class PopupComponent {
 
   private fetchData() {
     this.isFetching = true;
-    this.http.get<Data>('https://fast-lowlands-95849.herokuapp.com/api/common/getBanner')
-              .subscribe(res => {
-                  //console.log(res);
-                  this.isFetching = false;
-                  this.bannerData = res;
-              },
-              error => {
-                  this.errorMessage = error.message;
-              })
+    this.http
+      .get<Data>(
+        apiEndPoint
+      )
+      .pipe(
+        map((resData) => {
+          const accordianArray = [];
+          for (const key in resData.accordian) {
+            if (resData.accordian.hasOwnProperty(key)) {
+              accordianArray.push({
+                ...resData.accordian[key],
+                BlockingEnabled: false,
+              });
+            }
+          }
+          return accordianArray;
+        })
+      )
+      .subscribe(
+        (res) => {
+          this.isFetching = false;
+          this.bannerData = res;
+        },
+        (error) => {
+          this.errorMessage = error.message;
+        }
+      );
   }
 }

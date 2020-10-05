@@ -1,20 +1,42 @@
 <ngb-accordion #accordian="ngbAccordion" [destroyOnHide]="false" *ngIf="accordianData.length >= 1">
   <!-- Looping through accordianData Array to create panels -->
-  <ngb-panel #panelStyle [id]="'toggle-' + data.CategoyId" *ngFor="let data of accordianData; let i = index">
+  <ngb-panel
+    #panelStyle
+    [id]="'toggle-' + data.CategoyId"
+    *ngFor="let data of accordianData"
+  >
     <ng-template ngbPanelTitle>
       <!-- Pannel Header Swith Label -->
-      <label [attr.for]="data.CategoyHeading" class="switch mr-3">
-        <input type="checkbox" [checked]="isChecked" [id]="i" class="parent-checkbox" [value]="data.CategoyId"
-          #headerSwitch />
+      <label class="switch mr-3" [accessKey]="data.CategoyId">
+        <input
+          type="checkbox"
+          [(ngModel)]="data.BlockingEnabled"
+          class="parent-checkbox"
+          value="{{data.CategoyId}}"
+          name="list-group"
+          (ngModelChange)="turnOnChildSwitch(data)"
+          #headerSwitch
+        />
         <span class="slider round"></span>
       </label>
       <!-- Label End -->
-      <a type="button" class="inner-head-text" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-        aria-controls="collapseOne">{{ data.CategoyHeading }} <i class="fa fa-caret-down"></i></a>
+      <a
+        type="button"
+        class="inner-head-text"
+        data-toggle="collapse"
+        data-target="#collapseOne"
+        aria-expanded="true"
+        aria-controls="collapseOne"
+        >{{ data.CategoyHeading }} <i class="fa fa-caret-down"></i></a
+      >
     </ng-template>
     <ng-template ngbPanelContent>
-      <div id="collapseOne" class="collapse show" aria-labelledby="data.CategoyHeading"
-        data-parent="#customize-accordian">
+      <div
+        id="collapseOne"
+        class="collapse show"
+        aria-labelledby="data.CategoyHeading"
+        data-parent="#customize-accordian"
+      >
         <div class="card-body">
           <p>{{ data.CategoyText }}</p>
           <div class="plugins-options">
@@ -26,14 +48,28 @@
               <tr *ngFor="let plugin of data.PluginList">
                 <td>{{ plugin.ComplianceType }}</td>
                 <td>
-                  <div class="plugin-enable-option d-inline-flex align-items-center w-100">
-                    <label [accessKey]="data.CategoyHeading" class="switch mr-3">
-                      <input type="checkbox" [id]="plugin.ComplianceTypeID" [accessKey]="data.CategoyId" #childPlugin
-                        (input)="turnOnHeaderSwitch($event,data.CategoyId)" />
+                  <div
+                    class="plugin-enable-option d-inline-flex align-items-center w-100">
+                    <!-- Pannel Header Swith Label -->
+                    <label
+                      [accessKey]="data.CategoyId"
+                      class="switch mr-3"
+                    >
+                      <input
+                        type="checkbox"
+                        name="list-group-child"
+                        [(ngModel)]="plugin.BlockingEnabled"
+                        value="{{plugin.ComplianceTypeID}}"
+                        [accessKey]="data.CategoyId"
+                        #childPlugin
+                        (ngModelChange)="turnOnHeaderSwitch($event,data, data.PluginList)"
+                      />
                       <span class="slider round"></span>
                     </label>
-                    <a *ngIf="plugin.optOutExternalLink; else noSiteUrl" [href]="plugin.optOutExternalLink"
-                      class="ml-auto">Go To Site</a>
+                    <!-- Plugin Switch Label Ends -->
+                    <a *ngIf="plugin.optOutExternalLink; else noSiteUrl" href="{{plugin.optOutExternalLink}}" class="ml-auto"
+                      >Go To Site</a
+                    >
                     <ng-template #noSiteUrl>
                       <a href="#" class="ml-auto">Go To Site</a>
                     </ng-template>
